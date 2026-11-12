@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>UNLOST</title>
+<meta name="theme-color" content="#0A0A0B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="UNLOST">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&family=Manrope:wght@400;500;600&display=swap">
+<style>
+:root{--ink:#0A0A0B;--ink-2:#121214;--ink-3:#1B1B1F;--line:#232328;--fg:#F2F1EC;--mute:#8D8C93;--lime:#D4FF4F;--lime-dim:#3D5A14;--warn:#FFB454;--bad:#FF7A6B;
+--display:"Unbounded","Manrope",system-ui,sans-serif;--body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--ink);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;padding-top:env(safe-area-inset-top,0px)}
+[hidden]{display:none!important}
+button,a.btn{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0;text-decoration:none}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+.app{max-width:440px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px calc(90px + env(safe-area-inset-bottom,0px))}
+.logo{font-family:var(--display);font-weight:600;letter-spacing:.32em;font-size:17px;padding-left:.32em}
+h1{font-family:var(--display);font-weight:500;font-size:21px;margin:0 0 12px;text-wrap:balance}
+.mute{color:var(--mute)}.lime{color:var(--lime)}.small{font-size:12px}.center{text-align:center}
+.home{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding-top:4vh}
+.big{position:relative;width:200px;height:200px;border-radius:50%;border:1px solid var(--lime);display:flex;align-items:center;justify-content:center;margin:7vh 0 18px}
+.big .core{width:168px;height:168px;border-radius:50%;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.big:active .core{transform:scale(.96)}
+.ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--lime);animation:pu 1.8s ease-out infinite}
+@keyframes pu{from{transform:scale(1);opacity:.6}to{transform:scale(1.55);opacity:0}}
+@keyframes sp{to{transform:rotate(360deg)}}
+.spin{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--lime);animation:sp .9s linear infinite;margin:7vh auto 18px}
+@media (prefers-reduced-motion:reduce){.ring,.spin{animation:none}}
+.meter{display:flex;gap:3px;align-items:center;height:34px;margin:8px 0}
+.meter span{width:4px;border-radius:2px;background:var(--lime);height:4px;transition:height .08s}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:5px 11px;border-radius:20px;border:1px solid var(--line);color:#C4C3C9;white-space:nowrap}
+.chip.on{border-color:var(--lime);color:var(--lime)}.chip.ok{border-color:var(--lime-dim);color:var(--lime)}.chip.ex{border-color:#4a3a1c;color:var(--warn)}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);width:100%;text-align:left}
+.row .t{flex:1;min-width:0}.row .t div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cv{width:44px;height:44px;border-radius:10px;background:var(--ink-3);display:flex;align-items:center;justify-content:center;color:#5D5C63;flex:none;overflow:hidden}
+.cv img{width:100%;height:100%;object-fit:cover}
+.cv.play{border-radius:50%;background:var(--lime);color:var(--ink)}
+.btn{display:block;width:100%;text-align:center;padding:13px;border-radius:14px;font-size:14px;border:1px solid var(--line);margin-top:10px}
+.btn.p{background:var(--lime);color:var(--ink);border-color:var(--lime);font-weight:600}
+.btn.d{color:var(--bad);border-color:#4a2420}
+.box{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:12px}
+.box.hl{border:1.5px solid var(--lime)}.box.warn{border-color:#4a3a1c}
+.cover{width:100%;max-width:100%;aspect-ratio:1;max-height:260px;border-radius:16px;background:var(--ink-3);display:flex;align-items:center;justify-content:center;color:#45444A;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat{background:var(--ink-2);border-radius:12px;padding:12px}.stat b{display:block;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+input[type=text],textarea,select{width:100%;background:var(--ink-2);border:1px solid var(--line);border-radius:12px;color:var(--fg);padding:12px;font:inherit;margin-top:6px}
+label{display:block;font-size:13px;margin-top:12px}
+.err{color:var(--bad);font-size:12px;margin-top:6px}
+audio{width:100%;margin-top:10px;height:40px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--ink);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+.nav .in{max-width:440px;margin:0 auto;display:flex;justify-content:space-around;height:64px;align-items:center}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:#77767D;min-width:64px}
+.nav button.a{color:var(--lime)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--ink);padding:9px 14px;border-radius:12px;font-size:13px;z-index:9;max-width:90%}
+.back{display:flex;align-items:center;gap:6px;color:var(--mute);font-size:13px;margin-bottom:12px}
+svg.i{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<nav class="nav" aria-label="Navigation"><div class="in" id="nav"></div></nav>
+<div class="toast" id="toast" hidden></div>
+<input type="file" id="file" accept="audio/*" hidden>
+<script>
+const ICON={wave:'<path d="M3 12h2l2-6 3 12 3-9 2 6 2-3h4"/>',lib:'<path d="M4 4h4v16H4zM10 4h4v16h-4zM16 5l4 1-3 14-4-1z"/>',users:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16 4.5a3 3 0 0 1 0 6M18 14.5c2 .6 3 2.6 3 5.5"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',q:'<path d="M9 9a3 3 0 1 1 4 2.8c-.7.3-1 .9-1 1.7V15"/><circle cx="12" cy="18.5" r=".6"/>',play:'<path d="M8 5l11 7-11 7z"/>',disc:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/>',upload:'<path d="M12 16V4M7 9l5-5 5 5M4 20h16"/>',back:'<path d="M15 6l-6 6 6 6"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',wifi:'<path d="M3 3l18 18M8.5 16.5a5 5 0 0 1 7 0M5 12.9a10 10 0 0 1 5-2.8M14 10.1a10 10 0 0 1 5 2.8"/><circle cx="12" cy="20" r=".6"/>',lang:'<path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 6 8M11 5c0 3-2.5 7-6.5 9M13 21l4-9 4 9M14.5 18h5"/>',crown:'<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/>',trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'};
+const ic=(n,s=22)=>`<svg class="i" style="width:${s}px;height:${s}px" viewBox="0 0 24 24" aria-hidden="true">${ICON[n]}</svg>`;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const T={fr:{slogan:"Ne perds plus jamais un morceau",tap:"Touche pour écouter",left:n=>`${n} reconnaissance${n>1?'s':''} restante${n>1?'s':''} aujourd'hui`,import:"Importer un extrait audio",listen:"Écoute en cours",closer:"Rapproche-toi de la source",cancel:"Annuler",stopNow:"Analyser maintenant",analyzing:"Recherche du morceau",analyzingTxt:"Quelques secondes…",reliable:"Trouvé par reconnaissance audio",openS:"Ouvrir dans Spotify",openA:"Ouvrir dans Apple Music",openL:"Écouter ailleurs",fav:"Ajouter aux favoris",faved:"Dans tes favoris",notYet:"Pas encore trouvé",notYetTxt:"Ce morceau n'est peut-être pas encore sorti, ou l'extrait était trop bruyant. On l'a gardé dans ta bibliothèque avec ton extrait.",ctx:"Ajoute ce dont tu te souviens",ctxTxt:"Ça aidera à le retrouver.",name:"Nom de la fiche",namePh:"Le son de 2 h au Rex",where:"Où l'as-tu entendu ?",wherePh:"Club, festival, voiture, vidéo…",note:"Ce dont tu te souviens",notePh:"Voix féminine, gros kick, tech house…",saveCtx:"Enregistrer",saved:"Enregistré",retry:"Réécouter un extrait",askCom:"Demander à la communauté",comSoon:"La communauté partagée arrive à l'étape suivante. Ta fiche est prête à être publiée.",micTitle:"Accès au micro refusé",micTxt:"UNLOST a besoin du micro pour écouter. Sur iPhone : Réglages, Safari, Micro, puis Autoriser. Tu peux aussi importer un extrait audio.",micNone:"Ce navigateur ne permet pas d'enregistrer. Ouvre UNLOST dans Safari ou Chrome, ou importe un extrait audio.",offTitle:"Pas de connexion",offTxt:"Ton extrait est gardé. Réessaie quand tu as du réseau.",errTitle:"Le service n'a pas répondu",errTxt:"Ton extrait est gardé. Réessaie dans un instant.",tryAgain:"Réessayer",short:"Extrait trop court. Écoute au moins 5 secondes.",tooBig:"Fichier trop lourd : 5 Mo maximum.",notAudio:"Ce fichier n'est pas un fichier audio.",limitTitle:"Limite du jour atteinte",limitTxt:"Tu as utilisé tes 5 reconnaissances gratuites aujourd'hui. Elles reviennent demain.",seePrem:"Voir Premium",lib:"Bibliothèque",tFound:"Trouvés",tLost:"Perdus",tFav:"Favoris",searchPh:"Rechercher dans ta bibliothèque",unknown:"Morceau inconnu",emptyLost:"Aucun morceau perdu. Quand une écoute ne donne rien, il arrive ici avec ton extrait.",emptyFav:"Aucun favori pour l'instant.",emptyFound:"Tes morceaux reconnus arriveront ici.",noMatch:"Aucun résultat.",del1:"Retirer de la bibliothèque",removed:"Retiré",com:"Communauté",comBanner:"Aperçu : la communauté partagée entre utilisateurs arrive à l'étape 6. Les demandes ci-dessous sont des exemples.",example:"Exemple",props:n=>`${n} proposition${n>1?'s':''}`,back:"Retour",profile:"Profil",language:"Langue",sub:"Abonnement",del:"Supprimer mes données",delQ:"Supprimer toute ta bibliothèque et tes extraits de ce téléphone ?",delYes:"Oui, tout supprimer",delNo:"Annuler",deleted:"Données supprimées",prem:"UNLOST Premium",premTxt:"Pour ceux qui ne laissent filer aucun son.",freeTxt:"5 reconnaissances par jour · fiches perdues",perMonth:" / mois",perYear:"ou 39,99 € / an",save:"−33 % à l'année",premList:["30 reconnaissances par jour","Fiches perdues illimitées","Relances plus fréquentes","Sans publicité"],go:"Passer à Premium",payLater:"Le paiement arrive à l'étape 7.",nav:["Écouter","Biblio","Communauté","Profil"],from:"Entendu",lostAt:d=>`Perdu le ${d}`,foundAt:d=>`Trouvé le ${d}`,privacy:"Tes extraits restent sur ce téléphone. Ils ne sont envoyés au service de reconnaissance qu'au moment de l'analyse."},
+en:{slogan:"Never lose a track again",tap:"Tap to listen",left:n=>`${n} recognition${n>1?'s':''} left today`,import:"Import an audio clip",listen:"Listening",closer:"Move closer to the sound",cancel:"Cancel",stopNow:"Analyze now",analyzing:"Looking for the track",analyzingTxt:"A few seconds…",reliable:"Found by audio recognition",openS:"Open in Spotify",openA:"Open in Apple Music",openL:"Listen elsewhere",fav:"Add to favorites",faved:"In your favorites",notYet:"Not found yet",notYetTxt:"This track may not be released yet, or the clip was too noisy. We saved it to your library with your clip.",ctx:"Add what you remember",ctxTxt:"It helps find it.",name:"Card name",namePh:"The 2am track at Rex",where:"Where did you hear it?",wherePh:"Club, festival, car, video…",note:"What you remember",notePh:"Female vocal, big kick, tech house…",saveCtx:"Save",saved:"Saved",retry:"Record another clip",askCom:"Ask the community",comSoon:"The shared community comes next. Your card is ready to post.",micTitle:"Microphone access denied",micTxt:"UNLOST needs the microphone to listen. On iPhone: Settings, Safari, Microphone, then Allow. You can also import an audio clip.",micNone:"This browser can't record. Open UNLOST in Safari or Chrome, or import an audio clip.",offTitle:"No connection",offTxt:"Your clip is saved. Try again when you're back online.",errTitle:"The service didn't answer",errTxt:"Your clip is saved. Try again in a moment.",tryAgain:"Try again",short:"Clip too short. Listen for at least 5 seconds.",tooBig:"File too large: 5 MB max.",notAudio:"This isn't an audio file.",limitTitle:"Daily limit reached",limitTxt:"You've used your 5 free recognitions today. They come back tomorrow.",seePrem:"See Premium",lib:"Library",tFound:"Found",tLost:"Lost",tFav:"Favorites",searchPh:"Search your library",unknown:"Unknown track",emptyLost:"No lost tracks. When a listen finds nothing, it lands here with your clip.",emptyFav:"No favorites yet.",emptyFound:"Your recognized tracks will show up here.",noMatch:"No results.",del1:"Remove from library",removed:"Removed",com:"Community",comBanner:"Preview: the shared community between users comes at step 6. The requests below are examples.",example:"Example",props:n=>`${n} suggestion${n>1?'s':''}`,back:"Back",profile:"Profile",language:"Language",sub:"Subscription",del:"Delete my data",delQ:"Delete your whole library and clips from this phone?",delYes:"Yes, delete everything",delNo:"Cancel",deleted:"Data deleted",prem:"UNLOST Premium",premTxt:"For people who never let a track slip away.",freeTxt:"5 recognitions a day · lost cards",perMonth:" / month",perYear:"or €39.99 / year",save:"−33% yearly",premList:["30 recognitions a day","Unlimited lost cards","More frequent searches","No ads"],go:"Go Premium",payLater:"Payment comes at step 7.",nav:["Listen","Library","Community","Profile"],from:"Heard",lostAt:d=>`Lost on ${d}`,foundAt:d=>`Found on ${d}`,privacy:"Your clips stay on this phone. They're only sent to the recognition service when analyzed."}};
+
+const KEY='unlost-v1',DAILY=5,REC_MS=12000,MAX_FILE=5*1024*1024;
+const today=()=>new Date().toISOString().slice(0,10);
+const fresh=()=>({lang:(navigator.language||'fr').startsWith('fr')?'fr':'en',day:today(),used:0,found:[],lost:[],fav:[]});
+let st;try{st=Object.assign(fresh(),JSON.parse(localStorage.getItem(KEY))||{})}catch(e){st=fresh()}
+if(st.day!==today()){st.day=today();st.used=0}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const t=k=>T[st.lang][k];
+const left=()=>Math.max(0,DAILY-st.used);
+const fmtDate=ms=>new Date(ms).toLocaleDateString(st.lang,{day:'numeric',month:'short'});
+let view='home',sub={},busy=false;
+
+/* Clip storage on the phone (IndexedDB) */
+const idb=new Promise(res=>{try{const r=indexedDB.open('unlost',1);r.onupgradeneeded=()=>r.result.createObjectStore('clips');r.onsuccess=()=>res(r.result);r.onerror=()=>res(null)}catch(e){res(null)}});
+async function clipPut(id,blob){const db=await idb;if(!db)return;return new Promise(r=>{const tx=db.transaction('clips','readwrite');tx.objectStore('clips').put(blob,id);tx.oncomplete=r;tx.onerror=r})}
+async function clipGet(id){const db=await idb;if(!db)return null;return new Promise(r=>{const q=db.transaction('clips').objectStore('clips').get(id);q.onsuccess=()=>r(q.result||null);q.onerror=()=>r(null)})}
+async function clipDel(id){const db=await idb;if(!db)return;db.transaction('clips','readwrite').objectStore('clips').delete(id)}
+async function clipClear(){const db=await idb;if(!db)return;db.transaction('clips','readwrite').objectStore('clips').clear()}
+
+const $=id=>document.getElementById(id);
+function toast(m){const el=$('toast');el.textContent=m;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,2600)}
+function go(v,s={}){stopRec(true);view=v;sub=s;render();window.scrollTo(0,0)}
+
+/* Recording */
+let rec=null;
+function stopRec(discard){if(!rec)return;rec.discard=discard;clearInterval(rec.tick);cancelAnimationFrame(rec.raf);try{if(rec.mr.state!=='inactive')rec.mr.stop()}catch(e){}rec.stream.getTracks().forEach(x=>x.stop());try{rec.ctx.close()}catch(e){}if(discard)rec=null}
+async function startListen(){
+ if(busy)return;
+ if(left()<=0){go('limit');return}
+ if(!navigator.mediaDevices||!window.MediaRecorder){go('micerr',{none:true});return}
+ busy=true;let stream;
+ try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})}
+ catch(e){busy=false;go('micerr',{none:e&&e.name==='NotFoundError'});return}
+ busy=false;
+ const mr=new MediaRecorder(stream);const chunks=[];
+ const ctx=new (window.AudioContext||window.webkitAudioContext)();const an=ctx.createAnalyser();an.fftSize=256;ctx.createMediaStreamSource(stream).connect(an);
+ const started=Date.now();
+ view='listen';sub={};render();
+ rec={mr,stream,ctx,started,chunks};
+ mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+ mr.onstop=()=>{const r=rec;rec=null;if(!r||r.discard)return;const blob=new Blob(chunks,{type:mr.mimeType||'audio/mp4'});if(Date.now()-started<4000){toast(t('short'));go('home');return}send(blob)};
+ mr.start(250);
+ const buf=new Uint8Array(an.frequencyBinCount);
+ const draw=()=>{an.getByteFrequencyData(buf);const bars=document.querySelectorAll('.meter span');bars.forEach((b,i)=>{const v=buf[2+i*3]||0;b.style.height=(4+v/255*30)+'px'});if(rec)rec.raf=requestAnimationFrame(draw)};draw();
+ rec.tick=setInterval(()=>{const s=Math.max(0,Math.ceil((REC_MS-(Date.now()-started))/1000));const c=$('count');if(c)c.textContent=s+' s';if(Date.now()-started>=REC_MS){clearInterval(rec.tick);mr.stop();stream.getTracks().forEach(x=>x.stop())}},250);
+}
+function finishNow(){if(rec&&rec.mr.state==='recording'){clearInterval(rec.tick);rec.mr.stop();rec.stream.getTracks().forEach(x=>x.stop())}}
+
+/* Sending to the server */
+async function send(blob,retryId){
+ if(left()<=0){go('limit');return}
+ const id=retryId||('c'+Date.now());
+ await clipPut(id,blob);
+ view='analyze';sub={id};render();
+ if(!navigator.onLine){go('neterr',{id,kind:'off'});return}
+ let r,data;
+ try{r=await fetch('/api/recognize',{method:'POST',headers:{'Content-Type':blob.type||'application/octet-stream'},body:blob});data=await r.json()}
+ catch(e){go('neterr',{id,kind:navigator.onLine?'err':'off'});return}
+ if(!r.ok){if(data&&data.error==='too_short'){toast(t('short'));clipDel(id);go('home');return}go('neterr',{id,kind:'err'});return}
+ st.used++;
+ if(data.found){
+  clipDel(id);
+  const item={id,title:data.title,artist:data.artist,album:data.album,cover:data.cover,spotify:data.spotify,apple:data.apple,link:data.songLink,at:Date.now()};
+  st.found.unshift(item);st.lost=st.lost.filter(x=>x.id!==id);save();go('found',{id});
+ }else{
+  if(!st.lost.find(x=>x.id===id))st.lost.unshift({id,at:Date.now(),name:'',where:'',note:''});
+  save();go('lost',{id});
+ }
+}
+
+const COMMUNITY=[{title:{fr:'Tech house entendue au Rex',en:'Tech house heard at Rex'},who:'@pseudo1',n:4},{title:{fr:'ID dans un set de festival',en:'ID in a festival set'},who:'@pseudo2',n:1},{title:{fr:"Son d'une vidéo",en:'Sound from a video'},who:'@pseudo3',n:2}];
+
+const V={
+home:()=>`<div class="home"><div class="logo">UNLOST</div><div class="mute small">${t('slogan')}</div>
+<button class="big" id="bigBtn" aria-label="${t('tap')}"><span class="core">${ic('wave',52)}</span></button>
+<div style="font-size:16px;font-weight:500">${t('tap')}</div>
+<div class="mute small">${t('left')(left())}</div>
+<button class="chip" id="impBtn" style="margin-top:14px">${ic('upload',14)} ${t('import')}</button></div>`,
+listen:()=>`<div class="home"><div class="logo">UNLOST</div>
+<div class="big" style="border:0"><span class="ring"></span><span class="ring" style="animation-delay:.9s"></span><span class="core">${ic('mic',48)}</span></div>
+<div style="font-size:16px;font-weight:500">${t('listen')}</div>
+<div class="meter" aria-hidden="true">${'<span></span>'.repeat(16)}</div>
+<div class="mute small"><span id="count">${REC_MS/1000} s</span> · ${t('closer')}</div>
+<div style="display:flex;gap:8px;width:100%;margin-top:6px"><button class="btn" id="cancelBtn">${t('cancel')}</button><button class="btn p" id="nowBtn">${t('stopNow')}</button></div></div>`,
+analyze:()=>`<div class="home"><div class="logo">UNLOST</div><div class="spin" role="status" aria-label="${t('analyzing')}"></div><div style="font-size:16px;font-weight:500">${t('analyzing')}</div><div class="mute small">${t('analyzingTxt')}</div></div>`,
+found:()=>{const f=st.found.find(x=>x.id===sub.id);if(!f)return V.home();const fav=st.fav.includes(f.id);
+return `<button class="back" id="toLib">${ic('back',16)} ${t('lib')}</button>
+<div class="cover">${f.cover?`<img src="${esc(f.cover)}" alt="">`:ic('disc',64)}</div>
+<div style="font-size:20px;font-weight:600;margin-top:16px">${esc(f.title)}</div><div class="mute">${esc(f.artist)}${f.album?' · '+esc(f.album):''}</div>
+<div style="margin-top:10px"><span class="chip ok">${t('reliable')}</span></div>
+${f.spotify?`<a class="btn p" href="${esc(f.spotify)}" target="_blank" rel="noopener">${t('openS')}</a>`:''}
+${f.apple?`<a class="btn ${f.spotify?'':'p'}" href="${esc(f.apple)}" target="_blank" rel="noopener">${t('openA')}</a>`:''}
+${!f.spotify&&!f.apple&&f.link?`<a class="btn p" href="${esc(f.link)}" target="_blank" rel="noopener">${t('openL')}</a>`:''}
+<button class="btn" id="favBtn">${fav?t('faved'):t('fav')}</button>
+<button class="btn d" id="rmBtn">${t('del1')}</button>`},
+lost:()=>{const L=st.lost.find(x=>x.id===sub.id);if(!L)return V.home();
+return `<button class="back" id="toLib">${ic('back',16)} ${t('lib')}</button>
+<div style="width:56px;height:56px;border-radius:50%;border:1px solid var(--lime);display:flex;align-items:center;justify-content:center;color:var(--lime);margin:4px 0 16px">${ic('search',24)}</div>
+<h1>${L.name?esc(L.name):t('notYet')}</h1><p class="mute" style="margin:0">${t('notYetTxt')}</p>
+<audio id="player" controls preload="metadata"></audio>
+<form class="box" id="ctxForm" novalidate><div style="font-weight:600">${t('ctx')}</div><div class="mute small">${t('ctxTxt')}</div>
+<label for="fName">${t('name')}</label><input type="text" id="fName" maxlength="80" placeholder="${t('namePh')}" value="${esc(L.name)}">
+<label for="fWhere">${t('where')}</label><input type="text" id="fWhere" maxlength="80" placeholder="${t('wherePh')}" value="${esc(L.where)}">
+<label for="fNote">${t('note')}</label><textarea id="fNote" rows="3" maxlength="400" placeholder="${t('notePh')}">${esc(L.note)}</textarea>
+<button class="btn p" type="submit">${t('saveCtx')}</button></form>
+<button class="btn" id="askBtn">${t('askCom')}</button>
+<button class="btn" id="retryBtn">${t('retry')}</button>
+<button class="btn d" id="rmBtn">${t('del1')}</button>`},
+micerr:()=>`<div style="width:56px;height:56px;border-radius:50%;border:1px solid var(--bad);display:flex;align-items:center;justify-content:center;color:var(--bad);margin:24px 0 16px">${ic('mic',24)}</div><h1>${t('micTitle')}</h1><p class="mute">${sub.none?t('micNone'):t('micTxt')}</p><button class="btn p" id="impBtn">${t('import')}</button><button class="btn" data-go="home">${t('back')}</button>`,
+neterr:()=>`<div style="width:56px;height:56px;border-radius:50%;border:1px solid var(--warn);display:flex;align-items:center;justify-content:center;color:var(--warn);margin:24px 0 16px">${ic('wifi',24)}</div><h1>${sub.kind==='off'?t('offTitle'):t('errTitle')}</h1><p class="mute">${sub.kind==='off'?t('offTxt'):t('errTxt')}</p><button class="btn p" id="againBtn">${t('tryAgain')}</button><button class="btn" data-go="home">${t('back')}</button>`,
+limit:()=>`<div style="width:56px;height:56px;border-radius:50%;border:1px solid var(--lime);display:flex;align-items:center;justify-content:center;color:var(--lime);margin:24px 0 16px">${ic('lock',24)}</div><h1>${t('limitTitle')}</h1><p class="mute">${t('limitTxt')}</p><button class="btn p" data-go="sub">${t('seePrem')}</button><button class="btn" data-go="lib">${t('lib')}</button>`,
+lib:()=>{const tab=sub.tab||'found',q=(sub.q||'').toLowerCase();
+let list=tab==='found'?st.found:tab==='lost'?st.lost:st.found.filter(x=>st.fav.includes(x.id));
+if(q)list=list.filter(x=>[x.title,x.artist,x.album,x.name,x.where,x.note].join(' ').toLowerCase().includes(q));
+const empty=q?t('noMatch'):{found:t('emptyFound'),lost:t('emptyLost'),fav:t('emptyFav')}[tab];
+return `<h1>${t('lib')}</h1><input type="text" id="libQ" placeholder="${t('searchPh')}" value="${esc(sub.q||'')}" aria-label="${t('searchPh')}" style="margin:0 0 10px">
+<div class="chips" role="tablist">${[['found',t('tFound'),st.found.length],['lost',t('tLost'),st.lost.length],['fav',t('tFav'),st.fav.length]].map(x=>`<button class="chip ${tab===x[0]?'on':''}" role="tab" aria-selected="${tab===x[0]}" data-tab="${x[0]}">${x[1]} ${x[2]}</button>`).join('')}</div>
+<div id="libList">${list.length?list.map(x=>tab==='lost'?`<button class="row" data-lost="${x.id}"><span class="cv">${ic('q')}</span><span class="t"><div>${esc(x.name||t('unknown'))}</div><div class="mute small">${t('lostAt')(fmtDate(x.at))}${x.where?' · '+esc(x.where):''}</div></span></button>`
+:`<button class="row" data-found="${x.id}"><span class="cv">${x.cover?`<img src="${esc(x.cover)}" alt="">`:ic('disc')}</span><span class="t"><div>${esc(x.title)}</div><div class="mute small">${esc(x.artist)} · ${fmtDate(x.at)}</div></span></button>`).join(''):`<p class="mute small" style="margin-top:16px">${empty}</p>`}</div>
+<p class="mute small" style="margin-top:14px">${t('privacy')}</p>`},
+com:()=>`<h1>${t('com')}</h1><div class="box warn small" style="margin:0 0 8px;color:var(--warn)">${t('comBanner')}</div>
+${COMMUNITY.map(x=>`<div class="row"><span class="cv play">${ic('play',18)}</span><span class="t"><div>${x.title[st.lang]}</div><div class="mute small">${x.who} · ${t('example')}</div></span><span class="chip">${t('props')(x.n)}</span></div>`).join('')}`,
+profile:()=>`<h1>${t('profile')}</h1><div class="grid2" style="margin-bottom:10px"><div class="stat"><span class="mute small">${t('tFound')}</span><b>${st.found.length}</b></div><div class="stat"><span class="mute small">${t('tLost')}</span><b>${st.lost.length}</b></div></div>
+<button class="row" id="langBtn"><span class="mute">${ic('lang',20)}</span><span class="t">${t('language')}</span><span class="mute small">${st.lang==='fr'?'Français':'English'}</span></button>
+<button class="row" data-go="sub"><span class="mute">${ic('crown',20)}</span><span class="t">${t('sub')}</span><span class="mute small">Free</span></button>
+<button class="row" id="delBtn" style="color:var(--bad)"><span>${ic('trash',20)}</span><span class="t">${t('del')}</span></button>
+${sub.confirmDel?`<div class="box" role="alertdialog" aria-labelledby="dq"><div id="dq">${t('delQ')}</div><button class="btn d" id="delYes">${t('delYes')}</button><button class="btn" id="delNo">${t('delNo')}</button></div>`:''}`,
+sub:()=>`<button class="back" data-go="profile">${ic('back',16)} ${t('back')}</button><h1 style="margin-bottom:4px">${t('prem')}</h1><p class="mute" style="margin-top:0">${t('premTxt')}</p>
+<div class="box"><div style="font-weight:600">Free</div><div class="mute small">${t('freeTxt')}</div></div>
+<div class="box hl"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font-weight:600">Premium</span><span class="lime small">${t('save')}</span></div>
+<div style="font-size:26px;font-weight:600;margin-top:6px;font-variant-numeric:tabular-nums">4,99 €<span class="mute small">${t('perMonth')}</span></div><div class="mute small">${t('perYear')}</div>
+<div class="small" style="margin-top:10px;line-height:1.8">${t('premList').join('<br>')}</div></div>
+<button class="btn p" id="goPrem">${t('go')}</button>`
+};
+
+function render(){
+ $('app').innerHTML=V[view]();
+ const tabOf={home:0,listen:0,analyze:0,found:1,lost:1,micerr:0,neterr:0,limit:0,lib:1,com:2,profile:3,sub:3};
+ $('nav').innerHTML=[['wave','home'],['lib','lib'],['users','com'],['user','profile']].map((n,i)=>`<button class="${tabOf[view]===i?'a':''}" data-go="${n[1]}">${ic(n[0])}<span>${t('nav')[i]}</span></button>`).join('');
+ document.documentElement.lang=st.lang;
+ const on=(id,f)=>{const e=$(id);if(e)e.onclick=f};
+ on('bigBtn',startListen);
+ on('impBtn',()=>{if(left()<=0){go('limit');return}$('file').click()});
+ on('cancelBtn',()=>go('home'));
+ on('nowBtn',finishNow);
+ on('toLib',()=>go('lib',{tab:view==='lost'?'lost':'found'}));
+ on('favBtn',()=>{const i=st.fav.indexOf(sub.id);i<0?st.fav.push(sub.id):st.fav.splice(i,1);save();render()});
+ on('rmBtn',()=>{const wasLost=view==='lost';st.found=st.found.filter(x=>x.id!==sub.id);st.lost=st.lost.filter(x=>x.id!==sub.id);st.fav=st.fav.filter(x=>x!==sub.id);clipDel(sub.id);save();toast(t('removed'));go('lib',{tab:wasLost?'lost':'found'})});
+ on('askBtn',()=>toast(t('comSoon')));
+ on('retryBtn',startListen);
+ on('againBtn',async()=>{const b=await clipGet(sub.id);if(b)send(b,sub.id);else go('home')});
+ on('langBtn',()=>{st.lang=st.lang==='fr'?'en':'fr';save();render()});
+ on('goPrem',()=>toast(t('payLater')));
+ on('delBtn',()=>{sub.confirmDel=true;render()});
+ on('delNo',()=>{sub.confirmDel=false;render()});
+ on('delYes',()=>{const keep={lang:st.lang,day:st.day,used:st.used};st=Object.assign(fresh(),keep);clipClear();save();toast(t('deleted'));go('profile')});
+ document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+ document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{sub.tab=b.dataset.tab;render()});
+ document.querySelectorAll('[data-lost]').forEach(b=>b.onclick=()=>go('lost',{id:b.dataset.lost}));
+ document.querySelectorAll('[data-found]').forEach(b=>b.onclick=()=>go('found',{id:b.dataset.found}));
+ const q=$('libQ');if(q){q.oninput=()=>{sub.q=q.value;const pos=q.selectionStart;render();const n=$('libQ');n.focus();n.setSelectionRange(pos,pos)}}
+ const p=$('player');if(p){clipGet(sub.id).then(b=>{if(b){p.src=URL.createObjectURL(b)}else p.hidden=true})}
+ const f=$('ctxForm');if(f){f.onsubmit=e=>{e.preventDefault();const L=st.lost.find(x=>x.id===sub.id);if(!L)return;L.name=$('fName').value.trim();L.where=$('fWhere').value.trim();L.note=$('fNote').value.trim();save();toast(t('saved'));render()}}
+}
+$('file').onchange=e=>{const fl=e.target.files&&e.target.files[0];e.target.value='';if(!fl)return;
+ if(!(fl.type||'').startsWith('audio/')){toast(t('notAudio'));return}
+ if(fl.size>MAX_FILE){toast(t('tooBig'));return}
+ send(fl)};
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&rec)go('home')});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+render();
+</script>
+</body>
+</html>
